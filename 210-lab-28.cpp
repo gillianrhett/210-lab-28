@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <set>
 #include <limits> // for try-catch
+#include <vector> // for displaying in age order
 #include "Goat.h"
 using namespace std;
 
@@ -17,6 +18,7 @@ int main_menu();
 void edit_goat_name(set<Goat>&, int);
 void edit_goat_age(set<Goat>&, int);
 void edit_goat_color(set<Goat>&, int);
+void display_by_age(const set<Goat>&);
 
 int main() {
     srand(time(0));
@@ -74,8 +76,8 @@ int main() {
             if (i >= 0)
                 edit_goat_color(goats, i);
         }
-        if (choice == 8) { // MILESTONE 5
-            
+        if (choice == 8) { // list all goats in order by age MILESTONE 5
+            display_by_age(goats);
         }
         if (choice == 9) { // MILESTONE 6
             
@@ -253,6 +255,19 @@ void edit_goat_color(set<Goat>& gs, int i) {
                 return;
             }
             cur++;
+        }
+    }
+}
+
+void display_by_age(const set<Goat>& gs) {
+// get the goats from the set and show them in order by age instead of name
+    int min_age = -1;
+    vector<Goat> temp;
+    while (temp.size() < gs.size()){
+        for (Goat g : gs) {
+            if (g.get_age() <= min_age) {
+                
+            }
         }
     }
 }
