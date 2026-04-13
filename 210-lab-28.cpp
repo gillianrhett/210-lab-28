@@ -16,6 +16,7 @@ void display_trip(const set<Goat>&);
 int main_menu();
 void edit_goat_name(set<Goat>&, int);
 void edit_goat_age(set<Goat>&, int);
+void edit_goat_color(set<Goat>&, int);
 
 int main() {
     srand(time(0));
@@ -68,8 +69,10 @@ int main() {
             if (i >= 0)
                 edit_goat_age(goats, i);
         }
-        if (choice == 7) { // MILESTONE 4
-            
+        if (choice == 7) { // change a goat's color MILESTONE 4
+            int i = select_goat(goats);
+            if (i >= 0)
+                edit_goat_color(goats, i);
         }
         if (choice == 8) { // MILESTONE 5
             
@@ -157,7 +160,7 @@ int main_menu() {
     cout << "[5] Change a goat's name" << endl;
     cout << "[6] Change a goat's age" << endl;
     cout << "[7] Change a goat's color" << endl;
-    cout << "[8] " << endl;
+    cout << "[8] List in order by age" << endl;
     cout << "[9] " << endl;
     cout << "[10] " << endl;
     cout << "[11] " << endl;
@@ -180,7 +183,7 @@ int main_menu() {
 }
 
 void edit_goat_name(set<Goat>& gs, int i) {
-// user enters the goat's name and then can edit its data
+// user enters the goat's name and then can edit its name
     if (i != -1) { // if the goat was found
         // get the user input
         string name;
@@ -189,7 +192,6 @@ void edit_goat_name(set<Goat>& gs, int i) {
         // edit the goat's data
         int cur = 0; // current index in the for loop
         for (Goat g : gs) {
-            cout << cur << endl; // testing
             if (i == cur) {
                 Goat temp(name, g.get_age(), g.get_color());
                 gs.erase(g);
@@ -202,7 +204,7 @@ void edit_goat_name(set<Goat>& gs, int i) {
 }
 
 void edit_goat_age(set<Goat>& gs, int i) {
-// user enters the goat's name and then can edit its data
+// user enters the goat's name and then can edit its age
     if (i != -1) { // if the goat was found
         // get the user input
         int cur = 0; // current index in the for loop
@@ -226,9 +228,29 @@ void edit_goat_age(set<Goat>& gs, int i) {
         for (Goat g : gs) {
             if (i == cur) {
                 Goat temp(g.get_name(), age, g.get_color());
-                cout << temp.get_age() << endl; //testing
                 gs.erase(g);
                 gs.insert(temp);
+            }
+            cur++;
+        }
+    }
+}
+
+void edit_goat_color(set<Goat>& gs, int i) {
+// user enters the goat's name and then can edit its color
+    if (i != -1) { // if the goat was found
+        // get the user input
+        string color;
+        cout << "Enter new color: ";
+        cin >> color;
+        // edit the goat's data
+        int cur = 0; // current index in the for loop
+        for (Goat g : gs) {
+            if (i == cur) {
+                Goat temp(g.get_name(), g.get_age(), color);
+                gs.erase(g);
+                gs.insert(temp);
+                return;
             }
             cur++;
         }
