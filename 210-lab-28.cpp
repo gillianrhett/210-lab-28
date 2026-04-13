@@ -83,8 +83,13 @@ int main() {
         if (choice == 9) { // display total number of goats MILESTONE 7
             cout << "Current number of goats is: " << goats.size() << " goats." << endl;
         }
-        if (choice == 10) { // MILESTONE 8
-            
+        if (choice == 10) { // display average age MILESTONE 8
+            double avg = 0;
+            for(Goat g : goats) {
+                avg += g.get_age();
+            }
+            avg /= goats.size();
+            cout << fixed << setprecision(2) << "Average age of all goats: " << avg << " years." << endl;
         }
         if (choice == 11) { // delete all goats MILESTONE 6 but I think it should be the last choice
             goats.clear();
@@ -166,7 +171,7 @@ int main_menu() {
     cout << "[7] Change a goat's color" << endl;
     cout << "[8] List in order by age" << endl;
     cout << "[9] Display total number of goats" << endl;
-    cout << "[10] " << endl;
+    cout << "[10] Display average age of goats " << endl;
     cout << "[11] Delete all goats" << endl;
     cout << "[12] Quit" << endl;
     while (!(choice >= 1 && choice <=12)) {
