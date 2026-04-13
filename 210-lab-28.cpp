@@ -80,8 +80,8 @@ int main() {
         if (choice == 8) { // list all goats in order by age MILESTONE 5
             display_by_age(goats);
         }
-        if (choice == 9) { // MILESTONE 7
-            
+        if (choice == 9) { // display total number of goats MILESTONE 7
+            cout << "Current number of goats is: " << goats.size() << " goats." << endl;
         }
         if (choice == 10) { // MILESTONE 8
             
@@ -165,9 +165,9 @@ int main_menu() {
     cout << "[6] Change a goat's age" << endl;
     cout << "[7] Change a goat's color" << endl;
     cout << "[8] List in order by age" << endl;
-    cout << "[9] " << endl;
+    cout << "[9] Display total number of goats" << endl;
     cout << "[10] " << endl;
-    cout << "[11] Delete all goate" << endl;
+    cout << "[11] Delete all goats" << endl;
     cout << "[12] Quit" << endl;
     while (!(choice >= 1 && choice <=12)) {
         cout << "Choice --> ";
