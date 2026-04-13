@@ -53,14 +53,14 @@ int main() {
             display_trip(goats);
         }
         if (choice == 4) { // search for a goat MILESTONE 1
-            int count = select_goat(goats);
-            if (count >= 0)
+            int i = select_goat(goats);
+            if (i >= 0)
                 cout << "Goat found." << endl;
         }
         if (choice == 5) { // change a goat's name MILESTONE 2
-            int count = select_goat(goats);
-            if (count >= 0)
-                edit_goat_name(goats, count);
+            int i = select_goat(goats);
+            if (i >= 0)
+                edit_goat_name(goats, i);
         }
         if (choice == 6) { // MILESTONE 3
             
@@ -185,11 +185,13 @@ void edit_goat_name(set<Goat>& gs, int i) {
 
     // edit the goat's data
     int cur = 0; // current index in the for loop
-    cout << i << endl; // testing
     if (i != -1) { // if the goat was found
         for (Goat g : gs) {
+            cout << cur << endl; // testing
             if (i == cur) {
+                cout << "before " << g.get_name() << endl; // testing
                 g.set_name(name);
+                cout << "after " << g.get_name() << endl; // testing
                 return;
             }
             cur++;
