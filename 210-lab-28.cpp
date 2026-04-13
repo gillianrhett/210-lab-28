@@ -276,14 +276,27 @@ void display_by_age(const set<Goat>& gs) {
 }
 
 void RadixSort(vector<Goat>& v, int size) {
-    vector<vector<int>> buckets(10);
-    int di;
-    int maxd = 2; // goats can't live longer than 99 years
+    vector<vector<Goat>> buckets(10);
+    int copyBackIndex;      
+    int maxDigits = 2;    
     int pow10 = 1;
-    for (di = 0; di < maxd; ++di) {
-        for (int i = 0; i < size; ++i) {
-            int bucket_i = abs(v.at(i).get_age() / pow10) % 10;
-            buckets[bucket_i].push_back(v.at(i));
+    for (int digitIndex = 0; digitIndex < maxDigits; digitIndex++) {
+        // sort the goats into buckets by age
+        for (int i = 0; i < v.size(); i++) {
+            Goat g = v[i];
+            int bucketIndex = (abs(g.get_age()) / pow10) % 10;
+            buckets[bucketIndex].push_back(g);
         }
+        // put the goats back into the vector
+        copyBackIndex = 0;
+        for (int i = 0; i < 10; i++) {
+            vector<Goat>& bucket = buckets[i];
+            for (int j = 0; j < bucket.size(); j++) {
+                v[copyBackIndex] = bucket[j];
+                copyBackIndex++;
+            }
+            bucket.clear();
+        }      
+        pow10 *= 10;
     }
 }
