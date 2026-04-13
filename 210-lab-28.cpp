@@ -14,6 +14,7 @@ void delete_goat(set<Goat>&);
 void add_goat(set<Goat>&, string, int, string);
 void display_trip(const set<Goat>&);
 int main_menu();
+void edit_goat_name(set<Goat>&, int);
 
 int main() {
     srand(time(0));
@@ -51,29 +52,32 @@ int main() {
         if (choice == 3) { // list goats
             display_trip(goats);
         }
-        if (choice == 4) { // search for a goat
+        if (choice == 4) { // search for a goat MILESTONE 1
             int count = select_goat(goats);
             if (count >= 0)
                 cout << "Goat found." << endl;
         }
-        if (choice == 5) { // 
+        if (choice == 5) { // change a goat's name MILESTONE 2
+            int count = select_goat(goats);
+            if (count >= 0)
+                edit_goat_name(goats, count);
+        }
+        if (choice == 6) { // MILESTONE 3
             
         }
-        if (choice == 6) { // 
+        if (choice == 7) { // MILESTONE 4
             
         }
-        if (choice == 7) { // 
+        if (choice == 8) { // MILESTONE 5
             
         }
-        if (choice == 8) { // 
+        if (choice == 9) { // MILESTONE 6
             
         }
-        if (choice == 9) { // 
+        if (choice == 10) { // MILESTONE 7
             
         }
-        if (choice == 10) { // 
-        }
-        if (choice == 11) { // 
+        if (choice == 11) { // MILESTONE 8
         }
         if (choice == 12) { // quit
             cout << "\tGoodbye." << endl;
@@ -147,7 +151,7 @@ int main_menu() {
     cout << "[2] Delete a goat" << endl;
     cout << "[3] List goats" << endl;
     cout << "[4] Search for a goat" << endl;
-    cout << "[5] " << endl;
+    cout << "[5] Change a goat's name" << endl;
     cout << "[6] " << endl;
     cout << "[7] " << endl;
     cout << "[8] " << endl;
@@ -170,4 +174,25 @@ int main_menu() {
         }
     }
     return choice;
+}
+
+void edit_goat_name(set<Goat>& gs, int i) {
+// user enters the goat's name and then can edit its data
+    // get the user input
+    string name;
+    cout << "Enter new name: ";
+    cin >> name;
+
+    // edit the goat's data
+    int cur = 0; // current index in the for loop
+    cout << i << endl; // testing
+    if (i != -1) { // if the goat was found
+        for (Goat g : gs) {
+            if (i == cur) {
+                g.set_name(name);
+                return;
+            }
+            cur++;
+        }
+    }
 }
