@@ -15,6 +15,7 @@ void add_goat(set<Goat>&, string, int, string);
 void display_trip(const set<Goat>&);
 int main_menu();
 void edit_goat_name(set<Goat>&, int);
+void edit_goat_age(set<Goat>&, int);
 
 int main() {
     srand(time(0));
@@ -62,8 +63,10 @@ int main() {
             if (i >= 0)
                 edit_goat_name(goats, i);
         }
-        if (choice == 6) { // MILESTONE 3
-            
+        if (choice == 6) { // change a goat's age MILESTONE 3
+            int i = select_goat(goats);
+            if (i >= 0)
+                edit_goat_age(goats, i);
         }
         if (choice == 7) { // MILESTONE 4
             
@@ -152,8 +155,8 @@ int main_menu() {
     cout << "[3] List goats" << endl;
     cout << "[4] Search for a goat" << endl;
     cout << "[5] Change a goat's name" << endl;
-    cout << "[6] " << endl;
-    cout << "[7] " << endl;
+    cout << "[6] Change a goat's age" << endl;
+    cout << "[7] Change a goat's color" << endl;
     cout << "[8] " << endl;
     cout << "[9] " << endl;
     cout << "[10] " << endl;
@@ -178,13 +181,13 @@ int main_menu() {
 
 void edit_goat_name(set<Goat>& gs, int i) {
 // user enters the goat's name and then can edit its data
-    // get the user input
-    string name;
-    cout << "Enter new name: ";
-    cin >> name;
-    // edit the goat's data
-    int cur = 0; // current index in the for loop
     if (i != -1) { // if the goat was found
+        // get the user input
+        string name;
+        cout << "Enter new name: ";
+        cin >> name;
+        // edit the goat's data
+        int cur = 0; // current index in the for loop
         for (Goat g : gs) {
             cout << cur << endl; // testing
             if (i == cur) {
@@ -192,6 +195,39 @@ void edit_goat_name(set<Goat>& gs, int i) {
                 gs.insert(temp);
                 gs.erase(g);
                 return;
+            }
+            cur++;
+        }
+    }
+}
+
+void edit_goat_age(set<Goat>& gs, int i) {
+// user enters the goat's name and then can edit its data
+    if (i != -1) { // if the goat was found
+        // get the user input
+        int cur = 0; // current index in the for loop
+        int age = -1;
+        while ( age < 0 ) {
+            cout << "Enter new age: ";
+            try {
+                cin >> age;
+                if (cin.fail() || age < 0)
+                    throw invalid_argument("Invalid input. Enter a number 0 or greater.");
+            }
+            catch(invalid_argument& e)
+            {
+                cout << "Error: " << e.what() << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+
+        // put the new data in the set
+        for (Goat g : gs) {
+            if (i == cur) {
+                Goat temp(g.get_name(), age, g.get_color());
+                gs.insert(temp);
+                gs.erase(g);
             }
             cur++;
         }
