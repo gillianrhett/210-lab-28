@@ -182,16 +182,15 @@ void edit_goat_name(set<Goat>& gs, int i) {
     string name;
     cout << "Enter new name: ";
     cin >> name;
-
     // edit the goat's data
     int cur = 0; // current index in the for loop
     if (i != -1) { // if the goat was found
         for (Goat g : gs) {
             cout << cur << endl; // testing
             if (i == cur) {
-                cout << "before " << g.get_name() << endl; // testing
-                g.set_name(name);
-                cout << "after " << g.get_name() << endl; // testing
+                Goat temp(name, g.get_age(), g.get_color());
+                gs.insert(temp);
+                gs.erase(g);
                 return;
             }
             cur++;
