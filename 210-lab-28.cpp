@@ -18,7 +18,8 @@ int main_menu();
 void edit_goat_name(set<Goat>&, int);
 void edit_goat_age(set<Goat>&, int);
 void edit_goat_color(set<Goat>&, int);
-void display_by_age(set<Goat>);
+void display_by_age(const set<Goat>&);
+void RadixSort(vector<Goat>&, int);
 
 int main() {
     srand(time(0));
@@ -259,12 +260,30 @@ void edit_goat_color(set<Goat>& gs, int i) {
     }
 }
 
-void display_by_age(set<Goat> gs) {
+void display_by_age(const set<Goat>& gs) {
 // get the goats from the set and show them in order by age instead of name
+    // put the goats into a vector so they can be sorted by something other than name
     vector<Goat> temp;
-    // put the goats into a vector in order from youngest to oldest
+    for (Goat g : gs)
+        temp.push_back(g);
+    
+    // sort the goats by age
+    RadixSort(temp, temp.size());
     
     // display the goats from youngest to oldest
     for (Goat g : temp)
         cout << "\t" << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")" << endl;
+}
+
+void RadixSort(vector<Goat>& v, int size) {
+    vector<vector<int>> buckets(10);
+    int di;
+    int maxd = 2; // goats can't live longer than 99 years
+    int pow10 = 1;
+    for (di = 0; di < maxd; ++di) {
+        for (int i = 0; i < size; ++i) {
+            int bucket_i = abs(v.at(i).get_age() / pow10) % 10;
+            buckets[bucket_i].push_back(v.at(i));
+        }
+    }
 }
