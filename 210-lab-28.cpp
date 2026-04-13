@@ -192,8 +192,8 @@ void edit_goat_name(set<Goat>& gs, int i) {
             cout << cur << endl; // testing
             if (i == cur) {
                 Goat temp(name, g.get_age(), g.get_color());
-                gs.insert(temp);
                 gs.erase(g);
+                gs.insert(temp);
                 return;
             }
             cur++;
@@ -226,8 +226,9 @@ void edit_goat_age(set<Goat>& gs, int i) {
         for (Goat g : gs) {
             if (i == cur) {
                 Goat temp(g.get_name(), age, g.get_color());
-                gs.insert(temp);
+                cout << temp.get_age() << endl; //testing
                 gs.erase(g);
+                gs.insert(temp);
             }
             cur++;
         }
