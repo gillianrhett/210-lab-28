@@ -80,13 +80,14 @@ int main() {
         if (choice == 8) { // list all goats in order by age MILESTONE 5
             display_by_age(goats);
         }
-        if (choice == 9) { // MILESTONE 6
+        if (choice == 9) { // MILESTONE 7
             
         }
-        if (choice == 10) { // MILESTONE 7
+        if (choice == 10) { // MILESTONE 8
             
         }
-        if (choice == 11) { // MILESTONE 8
+        if (choice == 11) { // delete all goats MILESTONE 6 but I think it should be the last choice
+            goats.clear();
         }
         if (choice == 12) { // quit
             cout << "\tGoodbye." << endl;
@@ -166,7 +167,7 @@ int main_menu() {
     cout << "[8] List in order by age" << endl;
     cout << "[9] " << endl;
     cout << "[10] " << endl;
-    cout << "[11] " << endl;
+    cout << "[11] Delete all goate" << endl;
     cout << "[12] Quit" << endl;
     while (!(choice >= 1 && choice <=12)) {
         cout << "Choice --> ";
