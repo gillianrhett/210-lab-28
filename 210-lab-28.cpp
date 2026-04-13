@@ -52,7 +52,9 @@ int main() {
             display_trip(goats);
         }
         if (choice == 4) { // search for a goat
-            
+            int count = select_goat(goats);
+            if (count >= 0)
+                cout << "Goat found." << endl;
         }
         if (choice == 5) { // 
             
@@ -83,7 +85,7 @@ int main() {
 int select_goat(const set<Goat>& gs) {
 // return the index of a goat given the name input by user
     string nameIn; // user enters name of goat to delete
-    cout << "Enter name of goat to delete: ";
+    cout << "Enter name of goat: ";
     cin >> nameIn;
     int count = 0; // for checking whether we've reached the end of the set
     // search for a goat with this name
