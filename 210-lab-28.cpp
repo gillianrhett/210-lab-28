@@ -18,7 +18,7 @@ int main_menu();
 void edit_goat_name(set<Goat>&, int);
 void edit_goat_age(set<Goat>&, int);
 void edit_goat_color(set<Goat>&, int);
-void display_by_age(const set<Goat>&);
+void display_by_age(set<Goat>);
 
 int main() {
     srand(time(0));
@@ -259,15 +259,23 @@ void edit_goat_color(set<Goat>& gs, int i) {
     }
 }
 
-void display_by_age(const set<Goat>& gs) {
+void display_by_age(set<Goat> gs) {
 // get the goats from the set and show them in order by age instead of name
-    int min_age = -1;
+    int min_age = *gs.begin().get_age();
     vector<Goat> temp;
-    while (temp.size() < gs.size()){
+    // put the goats into a vector in order from youngest to oldest
+    while (!(gs.empty())){
         for (Goat g : gs) {
             if (g.get_age() <= min_age) {
-                
+            // add the youngest remaining goat(s) to the temp list 
+            //   and delete from the copy of the original list
+                temp.push_back(g);
+                min_age = g.get_age();
+                gs.erase(g);
             }
         }
     }
+    // display the goats from youngest to oldest
+    for (Goat g : temp)
+        cout << "\t" << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")" << endl;
 }
